@@ -1,4 +1,3 @@
-# main.py - Arquivo Principal do MakeMusicGreen
 
 from boas_vindas import boas_vindas
 from cadastro import cadastrar_usuario, fazer_login
@@ -79,3 +78,4 @@ if __name__ == "__main__":
     boas_vindas()
 
     menu_principal()
+
