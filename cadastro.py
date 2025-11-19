@@ -4,7 +4,6 @@ import os
 
 
 def carregar_usuarios():
-    """Carrega os usuários do arquivo usuarios.txt"""
     usuarios = []
     
     if not os.path.exists("usuarios.txt"):
@@ -28,14 +27,12 @@ def carregar_usuarios():
 
 
 def salvar_usuario(usuario):
-    """Salva um novo usuário no arquivo usuarios.txt"""
     with open("usuarios.txt", "a", encoding="utf-8") as arquivo:
         linha = f"{usuario['nome']}|{usuario['email']}|{usuario['senha']}|{usuario['minutos']}|{usuario['pontuacao']}\n"
         arquivo.write(linha)
 
 
 def atualizar_usuarios(usuarios):
-    """Atualiza todos os usuários no arquivo usuarios.txt"""
     with open("usuarios.txt", "w", encoding="utf-8") as arquivo:
         for usuario in usuarios:
             linha = f"{usuario['nome']}|{usuario['email']}|{usuario['senha']}|{usuario['minutos']}|{usuario['pontuacao']}\n"
@@ -43,20 +40,17 @@ def atualizar_usuarios(usuarios):
 
 
 def cadastrar_usuario():
-    """Cadastra um novo usuário no sistema"""
     limpar_tela()
-    print("=" * 50)
+    print("●" * 50)
     print("📝  CADASTRO DE USUÁRIO")
-    print("=" * 50)
+    print("●" * 50)
     
     nome = input("\nDigite seu nome: ").strip()
     email = input("Digite seu email: ").strip()
     senha = input("Digite uma senha: ").strip()
     
-    # Carrega usuários existentes
     usuarios = carregar_usuarios()
     
-    # Verifica se email já existe
     for usuario in usuarios:
         if usuario["email"] == email:
             print("\n❌ Este email já está cadastrado!")
@@ -78,11 +72,10 @@ def cadastrar_usuario():
 
 
 def fazer_login():
-    """Realiza o login de um usuário"""
     limpar_tela()
-    print("=" * 50)
+    print("●" * 50)
     print("🔐  LOGIN")
-    print("=" * 50)
+    print("●" * 50)
     
     email = input("\nDigite seu email: ").strip()
     senha = input("Digite sua senha: ").strip()
@@ -97,4 +90,5 @@ def fazer_login():
     
     print("\n❌ Email ou senha incorretos!")
     pausar()
+
     return None
