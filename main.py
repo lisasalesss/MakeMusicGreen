@@ -48,7 +48,7 @@ def menu_usuario(usuario):
         print("3️⃣  Ver meu nível")
         print("4️⃣  Fazer quiz")
         print("5️⃣  Voltar ao menu principal")
-        print("=" * 50)
+        print("●" * 50)
         
         opcao = input("\nEscolha uma opção: ").strip()
         
@@ -77,4 +77,5 @@ def menu_usuario(usuario):
 
 if __name__ == "__main__":
     boas_vindas()
+
     menu_principal()
