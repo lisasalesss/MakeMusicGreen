@@ -1,10 +1,7 @@
-# nivel.py - Sistema de Níveis do Usuário
-
 from utils import limpar_tela, pausar
 
 
 def calcular_nivel(minutos):
-    """Calcula o nível do usuário baseado nos minutos ouvidos"""
     if minutos <= 900:
         return "SILVER 🥈", "basico"
     elif minutos <= 1800:
@@ -14,11 +11,10 @@ def calcular_nivel(minutos):
 
 
 def mostrar_nivel(usuario):
-    """Mostra o nível atual do usuário"""
     limpar_tela()
-    print("=" * 50)
+    print("●" * 50)
     print("🏆  SEU NÍVEL DE USUÁRIO")
-    print("=" * 50)
+    print("●" * 50)
     
     nivel, tipo = calcular_nivel(usuario["minutos"])
     
@@ -33,4 +29,5 @@ def mostrar_nivel(usuario):
     
     print("=" * 50)
     pausar()
+
     return tipo
