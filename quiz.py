@@ -9,7 +9,6 @@ from datetime import datetime
 
 
 def carregar_questoes(arquivo):
-    """Carrega as questões do arquivo txt"""
     questoes = []
     
     try:
@@ -20,17 +19,14 @@ def carregar_questoes(arquivo):
             while i < len(linhas):
                 linha = linhas[i].strip()
                 
-                # Ignora linhas vazias
                 if not linha:
                     i += 1
                     continue
                 
-                # Linha com a pergunta
                 pergunta = linha
                 opcoes = []
                 resposta = ""
                 
-                # Lê as 4 opções
                 i += 1
                 for j in range(4):
                     if i < len(linhas):
@@ -39,14 +35,12 @@ def carregar_questoes(arquivo):
                             opcoes.append(opcao)
                         i += 1
                 
-                # Lê a resposta (próxima linha após as opções)
                 if i < len(linhas):
                     resp_linha = linhas[i].strip()
                     if resp_linha.startswith("Resposta:") or resp_linha.startswith("Gabarito:"):
                         resposta = resp_linha.split(":")[-1].strip().lower()
                         i += 1
                 
-                # Se encontrou pergunta com 4 opções e resposta, adiciona
                 if len(opcoes) == 4 and resposta:
                     questoes.append({
                         "pergunta": pergunta,
@@ -63,7 +57,6 @@ def carregar_questoes(arquivo):
 
 
 def carregar_quiz():
-    """Mostra animação de carregamento do quiz"""
     limpar_tela()
     print("\n⏳ Carregando quiz", end="")
     for i in range(3):
@@ -74,7 +67,6 @@ def carregar_quiz():
 
 
 def sortear_perguntas(tipo_nivel):
-    """Sorteia 10 perguntas de acordo com o nível"""
     if tipo_nivel == "basico":
         questoes = carregar_questoes("questoes_basicas.txt")
     else:
@@ -89,7 +81,6 @@ def sortear_perguntas(tipo_nivel):
 
 
 def salvar_respostas(usuario, perguntas, respostas_usuario, acertos):
-    """Salva as respostas do usuário no arquivo respostas.txt"""
     with open("respostas.txt", "a", encoding="utf-8") as arquivo:
         arquivo.write("=" * 60 + "\n")
         arquivo.write(f"USUÁRIO: {usuario['nome']} ({usuario['email']})\n")
@@ -108,11 +99,10 @@ def salvar_respostas(usuario, perguntas, respostas_usuario, acertos):
 
 
 def mostrar_resultado(usuario, acertos):
-    """Mostra o resultado final do quiz"""
     limpar_tela()
-    print("=" * 50)
+    print("●" * 50)
     print("📊  RESULTADO DO QUIZ")
-    print("=" * 50)
+    print("●" * 50)
     
     print(f"\n👤 {usuario['nome']}")
     print(f"✅ Acertos: {acertos}/10")
@@ -129,12 +119,12 @@ def mostrar_resultado(usuario, acertos):
     
     print("\n" + "=" * 50)
     print("💚  MENSAGEM MOTIVACIONAL  💚")
-    print("=" * 50)
+    print("●" * 50)
     print("\nCada pequena ação que você faz importa!")
     print("🌱 Ao aprender sobre sustentabilidade através")
     print("da música, você se torna parte da mudança!")
     print("🌍 Juntos, podemos criar um planeta melhor!")
-    print("=" * 50)
+    print("●" * 50)
     
     pausar()
     
@@ -158,16 +148,16 @@ def aplicar_quiz(usuario):
     respostas_usuario = []
     
     limpar_tela()
-    print("=" * 50)
+    print("●" * 50)
     print(f"🎯  QUIZ MAKEMUSICGREEN - NÍVEL {nivel}")
-    print("=" * 50)
+    print("●" * 50)
     print(f"\n📝 Responda as {len(perguntas)} perguntas abaixo:\n")
     pausar()
     
     for i, questao in enumerate(perguntas, 1):
         limpar_tela()
         print(f"PERGUNTA {i}/{len(perguntas)}")
-        print("=" * 50)
+        print("●" * 50)
         print(f"\n{questao['pergunta']}\n")
         
         for opcao in questao['opcoes']:
@@ -184,7 +174,6 @@ def aplicar_quiz(usuario):
         
         time.sleep(1.5)
     
-    # Atualiza pontuação do usuário
     usuario["pontuacao"] = acertos
     usuarios = carregar_usuarios()
     for u in usuarios:
@@ -193,8 +182,7 @@ def aplicar_quiz(usuario):
             break
     atualizar_usuarios(usuarios)
     
-    # Salva as respostas
     salvar_respostas(usuario, perguntas, respostas_usuario, acertos)
     
-    # Mostra resultado
+
     mostrar_resultado(usuario, acertos)
